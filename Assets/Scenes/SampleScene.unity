@@ -370,6 +370,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 683299680}
+  boxCollider2D: {fileID: 683299685}
+  spr: {fileID: 683299686}
+--- !u!61 &683299685 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 3545855248091886352, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
+    type: 3}
+  m_PrefabInstance: {fileID: 1311293295106438672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &683299686 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7894923954649684004, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
+    type: 3}
+  m_PrefabInstance: {fileID: 1311293295106438672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1002215249
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +925,7 @@ PrefabInstance:
     - target: {fileID: 1201430245866775938, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.53
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 1201430245866775938, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
         type: 3}
@@ -962,6 +976,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894923954649684004, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894923954649684004, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7894923954649684004, guid: fa869cb8a7d0b1b46b0bcf76fc18d070,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
