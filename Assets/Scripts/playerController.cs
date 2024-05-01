@@ -1,39 +1,54 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D boxCollider2D;
-    [SerializeField] private SpriteRenderer spr;
-
+    
     private Vector2 initialBoxSize;
     private Vector2 initialBoxOffset;
+public int speedi;
+public int jumpvalue;
 
-    private Color colore;
-
-    
-
- 
+private bool isJumptrue;
+public Transform groundcheck;
+public LayerMask layers;
+public float groundcheckradius;
 
  void Start()
  {
-     initialBoxSize = boxCollider2D.size;
+        initialBoxSize = boxCollider2D.size;
         initialBoxOffset = boxCollider2D.offset;
-        colore = spr.color;
+         
  }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Q)){
-            spr.color=Color.blue;
-        }
-        else {
-spr.color=colore;
-        }
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-          PlayJumpAnimation( verticalInput );
+isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,layers);
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+         float horizontalInput = Input.GetAxisRaw("Horizontal");
+         float verticalInput = Input.GetAxisRaw("Jump");
+         playAnimation(horizontalInput,verticalInput);
+         Movecharachter(horizontalInput,verticalInput);
+
+       
+    }
+
+   private void Movecharachter(float horizontalInput , float verticalInput){
+    Vector3 position = transform.position;
+    position.x = position.x + horizontalInput*speedi*Time.deltaTime;
+    transform.position = position;
+     if (verticalInput>0 && isJumptrue){
+        Vector3 posit = transform.position;
+        position.y = position.y + verticalInput*jumpvalue*Time.deltaTime;
+       transform.position = posit;
+    }
+   }
+
+   private void playAnimation(float horizontalInput,float verticalInput)
+{
+ animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         
 
         Vector3 scale = transform.localScale;
@@ -47,17 +62,23 @@ spr.color=colore;
         }
         transform.localScale = scale;
 
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            
-            Crouch(true);
+      
+        if (verticalInput>0 && isJumptrue){
+            animator.SetBool("IsJump",true);
         }
-        else
-        {
+        else{
+            animator.SetBool("IsJump",false);
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl)){
+        animator.SetBool("IsCrouch",true);
+        Crouch(true);
+        }
+        else{
+            animator.SetBool("IsCrouch",false);
             Crouch(false);
         }
-    }
-
+}
     public void Crouch(bool crouch)
     {
        
@@ -81,13 +102,6 @@ spr.color=colore;
         }
     }
 
-     public void PlayJumpAnimation( float vertical )
-    {
-        if ( vertical > 0 )
-        {
-            animator.SetTrigger( "IsJump" );
-        }
-    }
 }
 
 
