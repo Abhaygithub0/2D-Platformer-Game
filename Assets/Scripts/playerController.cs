@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
 public int speedi;
 public int jumpvalue;
 
+private bool isJumptrue;
+public Transform groundcheck;
+public LayerMask layers;
+public float groundcheckradius;
+
  void Start()
  {
         initialBoxSize = boxCollider2D.size;
@@ -20,8 +25,10 @@ public int jumpvalue;
  }
     private void Update()
     {
+isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,layers);
+
          float horizontalInput = Input.GetAxisRaw("Horizontal");
-         float verticalInput = Input.GetAxis("Jump");
+         float verticalInput = Input.GetAxisRaw("Jump");
          playAnimation(horizontalInput,verticalInput);
          Movecharachter(horizontalInput,verticalInput);
 
@@ -31,9 +38,12 @@ public int jumpvalue;
    private void Movecharachter(float horizontalInput , float verticalInput){
     Vector3 position = transform.position;
     position.x = position.x + horizontalInput*speedi*Time.deltaTime;
-    transform.position= position;
-    position.y = position.y + verticalInput*jumpvalue*Time.deltaTime;
     transform.position = position;
+     if (verticalInput>0 && isJumptrue){
+        Vector3 posit = transform.position;
+        position.y = position.y + verticalInput*jumpvalue*Time.deltaTime;
+       transform.position = posit;
+    }
    }
 
    private void playAnimation(float horizontalInput,float verticalInput)
@@ -53,7 +63,7 @@ public int jumpvalue;
         transform.localScale = scale;
 
       
-        if (verticalInput>0){
+        if (verticalInput>0 && isJumptrue){
             animator.SetBool("IsJump",true);
         }
         else{
