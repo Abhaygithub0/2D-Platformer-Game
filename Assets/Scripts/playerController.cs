@@ -28,11 +28,9 @@ public float groundcheckradius;
 isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,layers);
 
          float horizontalInput = Input.GetAxisRaw("Horizontal");
-         float verticalInput = Input.GetAxisRaw("Jump");
+       float verticalInput = Input.GetAxisRaw("Jump");
          playAnimation(horizontalInput,verticalInput);
          Movecharachter(horizontalInput,verticalInput);
-
-       
     }
 
    private void Movecharachter(float horizontalInput , float verticalInput){
@@ -41,10 +39,12 @@ isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,laye
     transform.position = position;
      if (verticalInput>0 && isJumptrue){
         Debug.Log("hapining");
-        Vector3 posit = transform.position;
+      /*  Vector3 posit = transform.position;
         position.y = position.y + verticalInput*jumpvalue*Time.deltaTime;
-       transform.position = posit;
+       transform.position = posit;*/
+           GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpvalue, ForceMode2D.Impulse);
     }
+
    }
 
    private void playAnimation(float horizontalInput,float verticalInput)
@@ -65,6 +65,7 @@ isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,laye
 
       
         if (verticalInput>0 && isJumptrue){
+            Debug.Log("working");
             animator.SetBool("IsJump",true);
         }
         else{

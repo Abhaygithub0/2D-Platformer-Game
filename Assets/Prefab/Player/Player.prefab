@@ -168,10 +168,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 8
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -198,12 +198,12 @@ MonoBehaviour:
   animator: {fileID: 6900886237888737789}
   boxCollider2D: {fileID: 3545855248091886352}
   speedi: 5
-  jumpvalue: 20
+  jumpvalue: 1
   groundcheck: {fileID: 474282926914731978}
   layers:
     serializedVersion: 2
     m_Bits: 64
-  groundcheckradius: 0.2
+  groundcheckradius: 0.3
 --- !u!1 &7014143512232771365
 GameObject:
   m_ObjectHideFlags: 0
