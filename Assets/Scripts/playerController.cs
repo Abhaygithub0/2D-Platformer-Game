@@ -40,6 +40,7 @@ isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,laye
     position.x = position.x + horizontalInput*speedi*Time.deltaTime;
     transform.position = position;
      if (verticalInput>0 && isJumptrue){
+        Debug.Log("hapining");
         Vector3 posit = transform.position;
         position.y = position.y + verticalInput*jumpvalue*Time.deltaTime;
        transform.position = posit;
