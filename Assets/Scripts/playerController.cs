@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public ScoreManager scoreManager;
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D boxCollider2D;
     
@@ -16,8 +17,9 @@ private bool isJumptrue;
 public Transform groundcheck;
 public LayerMask layers;
 public float groundcheckradius;
+ internal object playdeathanimation;
 
- void Start()
+    void Start()
  {
         initialBoxSize = boxCollider2D.size;
         initialBoxOffset = boxCollider2D.offset;
@@ -104,6 +106,13 @@ isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,laye
         }
     }
 
+    public void scoreUpdate()
+    {
+        Debug.Log("bhk burbag");
+        scoreManager.incrementvalue(10);
+    }
+
+   
 }
 
 
