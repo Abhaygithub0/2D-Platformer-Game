@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
 {
      [SerializeField] Image healthbar;
      [SerializeField] Animator aniame;
+     [SerializeField] GameObject gameouverUI;
  
     [SerializeField] private float health ;
    private float currenthealth;
@@ -31,17 +32,12 @@ public class PlayerHealth : MonoBehaviour
 
         if (health<=0){
             aniame.SetTrigger("IsDied");
+            gameouverUI.SetActive(true);
             GetComponent<PlayerController>().enabled=false;
             //restartgameafterfewsconds.
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-            int sceneno = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(sceneno);
-
-         //   GetComponent<PlayerDeath>().enabled = true;
-          /*  if (GetComponent<PlayerController>() != null)
-         {
-           GetComponent<PlayerController>().enabled = false;
-         }*/
+        
          
         }
     }

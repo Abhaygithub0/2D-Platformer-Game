@@ -2906,7 +2906,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - BEVEL_ON
   - GLOW_ON
   - UNDERLAY_ON
   m_InvalidKeywords: []
@@ -2955,9 +2954,9 @@ Material:
     - _FaceDilate: 0
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
-    - _GlowInner: 0.504
-    - _GlowOffset: 0.04
-    - _GlowOuter: 0.512
+    - _GlowInner: 0.282
+    - _GlowOffset: -0.59
+    - _GlowOuter: 0.524
     - _GlowPower: 0.374
     - _GradientScale: 11
     - _LightAngle: 1.51
