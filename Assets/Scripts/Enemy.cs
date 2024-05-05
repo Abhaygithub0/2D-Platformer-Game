@@ -24,9 +24,28 @@ private void Start()
 
     private void Update() 
     {
-        Vector2 Point = currentPosition.position - transform.position;
+      
+      enemymovement();
+      
+    }
 
-        if (currentPosition == pointB.transform)
+private void OnCollisionEnter2D(Collision2D other) 
+{
+    if(other.gameObject.GetComponent<PlayerController>() != null){
+        Debug.Log("Hit");
+         PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+         if(playerHealth != null){
+           playerHealth.takedamage(1);
+         }
+         else{
+            Debug.Log("didnot find it");
+         }
+    
+    }
+}
+    void enemymovement(){
+
+         if (currentPosition == pointB.transform)
         {
             rgbd2d.velocity = new Vector2(speedofEnemy , 0);
             sprender.flipX =false;
@@ -37,7 +56,7 @@ private void Start()
             sprender.flipX =true;
         }
 
-        if (Vector2.Distance(transform.position,currentPosition.position)<0.5f && currentPosition == pointB.transform)
+      if (Vector2.Distance(transform.position,currentPosition.position)<0.5f && currentPosition == pointB.transform)
         {
             currentPosition = pointA.transform;
         }
@@ -45,6 +64,6 @@ private void Start()
         if (Vector2.Distance(transform.position,currentPosition.position)<0.5f && currentPosition == pointA.transform)
         {
             currentPosition = pointB.transform;
-        }
+        } 
     }
 }
