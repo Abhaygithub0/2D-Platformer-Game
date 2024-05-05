@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8369346485130606056}
   - component: {fileID: 3629382127111924740}
   - component: {fileID: 2675932663047306394}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChomperWalk
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
