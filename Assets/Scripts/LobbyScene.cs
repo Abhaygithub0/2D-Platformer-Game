@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class LobbyScene : MonoBehaviour
 {
    [SerializeField] Button play ,exit,rules,menu;
-   public GameObject settingwindow,menuwindow;
+   public GameObject settingwindow,menuwindow,levelselection;
 
 private void Start() {
     play.onClick.AddListener(playgame);
@@ -24,15 +24,18 @@ private void Start() {
         Debug.Log("ExitGame");
     }
     void playgame(){
-        SceneManager.LoadScene(1);
+        menuwindow.SetActive(false);
+        settingwindow.SetActive(false);
+        levelselection.SetActive(true);
     }
     void settings(){
+        levelselection.SetActive(false);
          menuwindow.SetActive(false);
          settingwindow.SetActive(true);
-        Debug.Log("settingGame");
+       
     }
     void menugame(){
-        
+        levelselection.SetActive(false);  
          settingwindow.SetActive(false);
           menuwindow.SetActive(true);
         
