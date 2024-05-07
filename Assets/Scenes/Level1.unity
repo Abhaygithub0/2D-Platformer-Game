@@ -3498,7 +3498,7 @@ PrefabInstance:
     - target: {fileID: 2500306929674222366, guid: 62797928fbeb53347b5bfe59d76449df,
         type: 3}
       propertyPath: scene
-      value: Level2
+      value: lobbyscene
       objectReference: {fileID: 0}
     - target: {fileID: 5496197986476380632, guid: 62797928fbeb53347b5bfe59d76449df,
         type: 3}

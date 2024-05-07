@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class LevelLoad : MonoBehaviour
 {
-    //[SerializeField] private string scene;
+    [SerializeField] private string scene;
    
     private void Update() {
        //* scene = SceneManager.GetActiveScene().buildIndex.name;
@@ -19,6 +19,7 @@ public class LevelLoad : MonoBehaviour
     {
        // SceneManager.LoadScene(scene);
         LevelManager.Instance.currentlevelcomleted();
+        SceneManager.LoadScene(scene);
         
     }
  }
