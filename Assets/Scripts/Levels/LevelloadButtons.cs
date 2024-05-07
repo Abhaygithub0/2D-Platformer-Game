@@ -16,7 +16,21 @@ private void Start() {
 
     private void playscene()
     {
-        SceneManager.LoadScene(scenename);
+        Levelstatus levelstatus= LevelManager.Instance.GetLevelstatus(scenename);
+        switch(levelstatus)
+        {
+            case Levelstatus.locked:
+            Debug.Log("cant play");
+            break;
+            case Levelstatus.unlocked:
+            SceneManager.LoadScene(scenename);
+            break;
+            case Levelstatus.completed:
+            SceneManager.LoadScene(scenename);
+            break;
+            
+        }
+        
     }
 
    
