@@ -8,14 +8,17 @@ using UnityEngine.UI;
 
 public class LevelLoad : MonoBehaviour
 {
-    [SerializeField] private string scene;
+    //[SerializeField] private string scene;
    
-
+    private void Update() {
+       //* scene = SceneManager.GetActiveScene().buildIndex.name;
+    }
     private void OnTriggerEnter2D(Collider2D other) {
     if(other.gameObject.GetComponent<PlayerController>() != null)
     //if(other.gameObject.CompareTag("Player"))
     {
-        SceneManager.LoadScene(scene);
+       // SceneManager.LoadScene(scene);
+        LevelManager.Instance.currentlevelcomleted();
         
     }
  }
