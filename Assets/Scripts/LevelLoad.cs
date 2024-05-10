@@ -8,20 +8,23 @@ using UnityEngine.UI;
 
 public class LevelLoad : MonoBehaviour
 {
-    [SerializeField] private string scene;
    
-    private void Update() {
-       //* scene = SceneManager.GetActiveScene().buildIndex.name;
-    }
-    private void OnTriggerEnter2D(Collider2D other) {
-    if(other.gameObject.GetComponent<PlayerController>() != null)
-    //if(other.gameObject.CompareTag("Player"))
+   [SerializeField] GameObject gameoverUI2;
+
+  
+private void OnTriggerEnter2D(Collider2D other)
+{
+    if (other.gameObject.GetComponent<PlayerController>() != null)
     {
-       // SceneManager.LoadScene(scene);
-        LevelManager.Instance.currentlevelcomleted();
-        SceneManager.LoadScene(scene);
-        
+        if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.SetCurrentLevelComplete();
+            gameoverUI2.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("LevelManager instance is null!");
+        }
     }
- }
-    
+}
 }

@@ -1,79 +1,74 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
+
 using UnityEngine;
-using UnityEngine.Purchasing;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager instance;
-    
-    public string[] levels;
-    public static LevelManager Instance {
-         get {
-             return instance;
-             } 
-         }
+    public static LevelManager Instance{ get{ return instance; } }
 
-    private void Awake() {
-        if (instance==null){
+    private string Level1 = "Level1";
+
+    private void Awake()
+    {
+        if(instance==null)
+        {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else{
+        } else
+        {
             Destroy(gameObject);
         }
     }
 
-    private void Start() {
-        if(GetLevelstatus(levels[0])==Levelstatus.locked)
+    private void Start()
+    {
+        if(GetLevelStatus(Level1) == Levelstatus.Locked)
         {
-           setLevelstatus(levels[0],Levelstatus.unlocked);
+            SetLevelStatus(Level1, Levelstatus.Unlocked);
         }
     }
 
-public void currentlevelcomleted()
+    public Levelstatus GetLevelStatus(string levelName)
+    {
+        Levelstatus levelStatus = (Levelstatus) PlayerPrefs.GetInt(levelName);
+        return levelStatus;
+    }
+
+    public void SetLevelStatus(string levelName, Levelstatus levelStatus)
+    {
+        PlayerPrefs.SetInt(levelName, (int) levelStatus);
+    }
+
+    public void SetCurrentLevelComplete()
+    {
+        SetLevelStatus(SceneManager.GetActiveScene().name, Levelstatus.Completed);
+
+        string nextSceneName = NameFromIndex(SceneManager.GetActiveScene().buildIndex + 1);
+        SetLevelStatus(nextSceneName, Levelstatus.Unlocked);
+    }
+
+    private string NameFromIndex(int BuildIndex)
 {
+    string path = SceneUtility.GetScenePathByBuildIndex(BuildIndex);
+    int slash = path.LastIndexOf('/');
+    if (slash == -1) return "";  // Slash not found, return empty string or handle error
 
-    Scene currentscene = SceneManager.GetActiveScene();
-    setLevelstatus(currentscene.name,Levelstatus.unlocked);
-   int currentSceneIndex= Array.FindIndex(levels,level=>level==currentscene.name);
-   int nextSceneIndex = currentSceneIndex+1;
-   if(nextSceneIndex<levels.Length){
-    setLevelstatus(levels[nextSceneIndex],Levelstatus.unlocked);
-   }
+    string name = path.Substring(slash + 1);
+    int dot = name.LastIndexOf('.');
+    if (dot == -1) return name;  // Dot not found, return the whole name
 
-    /* currentlevel = SceneManager.GetActiveScene().name;
-     int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
-     nextlevel = SceneManager.GetActiveScene().name;
-     if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-             nextlevel = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(nextSceneIndex));
-            Debug.Log("Next scene name: " + nextlevel);
-        }
-        else
-        {
-            Debug.Log("No next scene found, this is the last scene.");
-        }
-
-        Instance.setLevelstatus(currentlevel,Levelstatus.completed);
-        Instance.setLevelstatus(nextlevel,Levelstatus.unlocked);*/
-
-
-}
-
-     public Levelstatus GetLevelstatus(string level){
-         Levelstatus levelstatus = (Levelstatus)PlayerPrefs.GetInt(level,0);
-        return levelstatus;
+    // Check to avoid negative length for substring
+    if (dot > 0) 
+    {
+        return name.Substring(0, dot);
     }
-
-   public void setLevelstatus(string level, Levelstatus levelstatus)
-   {
-      PlayerPrefs.SetInt(level,(int)levelstatus);
-      Debug.Log("level completed"+level+levelstatus);
-   }
+    else
+    {
+        return "";  // Dot is at the start, return empty string or handle error
+    }
 }
+
+}
+
 
