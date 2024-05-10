@@ -10,46 +10,49 @@ public class PlayerController : MonoBehaviour
     
     private Vector2 initialBoxSize;
     private Vector2 initialBoxOffset;
-public int speedi;
+public int speedvalue;
 public int jumpvalue;
 
 private bool isJumptrue;
+private bool isJumping;
 public Transform groundcheck;
 public LayerMask layers;
 public float groundcheckradius;
  internal object playdeathanimation;
 
+ //private Rigidbody2D rgbd2d;
+
     void Start()
  {
         initialBoxSize = boxCollider2D.size;
         initialBoxOffset = boxCollider2D.offset;
+       // rgbd2d=GetComponent<Rigidbody2D>();
          
  }
     private void Update()
     {
-isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,layers);
+   isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,layers);
 
          float horizontalInput = Input.GetAxisRaw("Horizontal");
-       float verticalInput = Input.GetAxisRaw("Jump");
-         playAnimation(horizontalInput,verticalInput);
-         Movecharachter(horizontalInput,verticalInput);
+         bool verticalInput = Input.GetButtonDown("Jump");
+         playAnimation(horizontalInput);
+         Movecharachter(horizontalInput ,verticalInput);
     }
 
-   private void Movecharachter(float horizontalInput , float verticalInput){
+   private void Movecharachter(float horizontalInput ,bool verticalInput){
     Vector3 position = transform.position;
-    position.x = position.x + horizontalInput*speedi*Time.deltaTime;
+    position.x = position.x + horizontalInput*speedvalue*Time.deltaTime;
     transform.position = position;
-     if (verticalInput>0 && isJumptrue){
-        Debug.Log("hapining");
-      /*  Vector3 posit = transform.position;
-        position.y = position.y + verticalInput*jumpvalue*Time.deltaTime;
-       transform.position = posit;*/
-           GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpvalue, ForceMode2D.Impulse);
+   
+     if (verticalInput&& isJumptrue){
+        GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpvalue, ForceMode2D.Impulse);
+        isJumping=true;
+        SoundManager.Instance.play(soundplaces.Playerjump);
     }
 
    }
 
-   private void playAnimation(float horizontalInput,float verticalInput)
+   private void playAnimation(float horizontalInput)
 {
  animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
         
@@ -64,15 +67,7 @@ isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,laye
             scale.x = 1 * Mathf.Abs(scale.x);
         }
         transform.localScale = scale;
-
-      
-        if (verticalInput>0 && isJumptrue){
-            Debug.Log("working");
-            animator.SetBool("IsJump",true);
-        }
-        else{
-            animator.SetBool("IsJump",false);
-        }
+animator.SetBool("IsJump",isJumping&& !isJumptrue);
 
         if (Input.GetKey(KeyCode.LeftControl)){
         animator.SetBool("IsCrouch",true);
@@ -108,11 +103,18 @@ isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,laye
 
     public void scoreUpdate()
     {
-        Debug.Log("bhk burbag");
+       
         scoreManager.incrementvalue(10);
     }
 
-   
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isJumping = false;
+        }
+    }
 }
+
 
 

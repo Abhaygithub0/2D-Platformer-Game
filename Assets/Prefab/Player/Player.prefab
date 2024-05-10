@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 753209669686786339}
   - component: {fileID: 7654157031224772548}
   - component: {fileID: 8075874518160063154}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -37,7 +37,6 @@ Transform:
   m_Children:
   - {fileID: 474282926914731978}
   - {fileID: 828141145361657329}
-  - {fileID: 7401506869314552714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7894923954649684004
@@ -170,10 +169,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 8
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -200,13 +199,13 @@ MonoBehaviour:
   scoreManager: {fileID: 0}
   animator: {fileID: 6900886237888737789}
   boxCollider2D: {fileID: 3545855248091886352}
-  speedi: 5
-  jumpvalue: 2
-  groundcheck: {fileID: 7401506869314552714}
+  speedvalue: 8
+  jumpvalue: 30
+  groundcheck: {fileID: 474282926914731978}
   layers:
     serializedVersion: 2
     m_Bits: 64
-  groundcheckradius: 0.2
+  groundcheckradius: 0.4
 --- !u!114 &8075874518160063154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
   aniame: {fileID: 6900886237888737789}
+  gameouverUI: {fileID: 0}
   health: 3
 --- !u!1 &7014143512232771365
 GameObject:
@@ -234,7 +234,7 @@ GameObject:
   m_Layer: 0
   m_Name: groundcheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -253,37 +253,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1201430245866775938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8803103537728518791
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7401506869314552714}
-  m_Layer: 0
-  m_Name: groundcheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7401506869314552714
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8803103537728518791}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.018, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1201430245866775938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9022259201797644261
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +263,6 @@ GameObject:
   m_Component:
   - component: {fileID: 828141145361657329}
   - component: {fileID: 4091953663337504806}
-  - component: {fileID: 5097102479095882673}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -368,11 +336,3 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5097102479095882673
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9022259201797644261}
-  m_Enabled: 1
