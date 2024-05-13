@@ -19,7 +19,8 @@ public Transform groundcheck;
 public LayerMask layers;
 public float groundcheckradius;
  internal object playdeathanimation;
-
+int jumpcount=0;
+int maxJumpcount=2;
 
 
  private float horizontalInput;
@@ -53,11 +54,13 @@ public float groundcheckradius;
    }
 
    private void PlayerJump(bool verticalInput){
-      if (verticalInput&& isJumptrue){
+      if (verticalInput && (isJumptrue || (!isJumptrue && jumpcount < maxJumpcount))){
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpvalue, ForceMode2D.Impulse);
         isJumping=true;
+        jumpcount++;
         SoundManager.Instance.play(soundplaces.Playerjump);
     }
+   
 
    }
 
@@ -124,6 +127,7 @@ animator.SetBool("IsJump",isJumping&& !isJumptrue);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isJumping = false;
+             jumpcount=0;
         }
     }
 }

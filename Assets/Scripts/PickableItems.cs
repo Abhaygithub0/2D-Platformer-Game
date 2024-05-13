@@ -12,6 +12,7 @@ public class PickableItems : MonoBehaviour
     if(other.gameObject.GetComponent<PlayerController>() != null){
         PlayerController pc = other.gameObject.GetComponent<PlayerController>();
         pc.scoreUpdate();
+        SoundManager.Instance.play(soundplaces.genricPickup);
     
        Destroy(gameObject);
 }

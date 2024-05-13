@@ -64,6 +64,7 @@ public enum soundplaces
     Playerdeath,
     levellocked,
     levelunloced,
-    environmentMusic
+    environmentMusic,
+    genricPickup,
 }
 
