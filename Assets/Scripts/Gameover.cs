@@ -17,11 +17,13 @@ public class Gameover : MonoBehaviour
 
     private void playcurrentscene()
     {
+        SoundManager.Instance.play(soundplaces.buttonclick);
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void playmenuscene()
     {
+         SoundManager.Instance.play(soundplaces.buttonclick);
        SceneManager.LoadScene(0);
     }
 }

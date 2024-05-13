@@ -21,20 +21,24 @@ private void Start() {
    
 
     void exitgame(){
+         SoundManager.Instance.play(soundplaces.buttonclick);
         Debug.Log("ExitGame");
     }
     void playgame(){
+        SoundManager.Instance.play(soundplaces.buttonclick);
         menuwindow.SetActive(false);
         settingwindow.SetActive(false);
         levelselection.SetActive(true);
     }
     void settings(){
+         SoundManager.Instance.play(soundplaces.buttonclick);
         levelselection.SetActive(false);
          menuwindow.SetActive(false);
          settingwindow.SetActive(true);
        
     }
     void menugame(){
+         SoundManager.Instance.play(soundplaces.buttonclick);
         levelselection.SetActive(false);  
          settingwindow.SetActive(false);
           menuwindow.SetActive(true);

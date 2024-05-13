@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    
      [SerializeField] Image healthbar;
      [SerializeField] Animator aniame;
      [SerializeField] GameObject gameouverUI;
  
     [SerializeField] private float health ;
+    public float restartDelay = 3f;
+
+    
    private float currenthealth;
 
      private void Awake() {
@@ -31,11 +36,16 @@ public class PlayerHealth : MonoBehaviour
         health = currenthealth;
 
         if (health<=0){
+            SoundManager.Instance.play(soundplaces.Playerdeath);
             aniame.SetTrigger("IsDied");
-            gameouverUI.SetActive(true);
+
+            StartCoroutine(restartwithdelay(restartDelay));
             GetComponent<PlayerController>().enabled=false;
-            //restartgameafterfewsconds.
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GetComponent<Rigidbody2D>().simulated=false;
+            GetComponent<Collider2D>().enabled=false;
+
+           
+           
 
         
          
@@ -43,5 +53,9 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-
+private IEnumerator restartwithdelay(float delay){
+    yield return new WaitForSeconds(delay);
+    gameouverUI.SetActive(true);
 }
+}
+
