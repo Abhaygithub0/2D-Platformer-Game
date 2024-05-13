@@ -12,9 +12,6 @@ public class SoundManager : MonoBehaviour
     public AudioSource soundSFX;
     public audio[] audios;
 
-private void Start() {
-    
-}
 
     private static SoundManager instance;
     public static SoundManager Instance
@@ -28,6 +25,8 @@ private void Start() {
             Destroy(gameObject);
         }
     }
+
+    
     public void play(soundplaces sounds){
         AudioClip clip = Getsoundclip(sounds);
         if(clip!=null){
@@ -37,6 +36,9 @@ private void Start() {
             Debug.Log("clip didnot found");
         }
     }
+   
+ 
+   
 
     private AudioClip Getsoundclip(soundplaces sounds)
     {

@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
             GetComponent<Rigidbody2D>().simulated=false;
             GetComponent<Collider2D>().enabled=false;
 
-            //restartgameafterfewsconds.
+           
            
 
         

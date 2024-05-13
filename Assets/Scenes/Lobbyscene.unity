@@ -2286,7 +2286,7 @@ MonoBehaviour:
   - audioType: 1
     audioClip: {fileID: 8300000, guid: c590ed5eebed2b849be515defbd5c89b, type: 3}
   - audioType: 2
-    audioClip: {fileID: 8300000, guid: 234b586e812e70b419affbe33e30dcfe, type: 3}
+    audioClip: {fileID: 0}
   - audioType: 3
     audioClip: {fileID: 8300000, guid: 31b2284e8ab3f244182080ca7da474b7, type: 3}
 --- !u!81 &1125044958
@@ -2573,9 +2573,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0651b56880a11ef45909b779443691aa, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.749
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

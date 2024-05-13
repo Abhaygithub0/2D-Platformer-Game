@@ -20,7 +20,7 @@ public LayerMask layers;
 public float groundcheckradius;
  internal object playdeathanimation;
 
- private Rigidbody2D rgbd2d;
+
 
  private float horizontalInput;
 
@@ -29,8 +29,7 @@ public float groundcheckradius;
  {
         initialBoxSize = boxCollider2D.size;
         initialBoxOffset = boxCollider2D.offset;
-        rgbd2d=GetComponent<Rigidbody2D>();
-         
+        
  }
     private void Update()
     {
@@ -44,13 +43,11 @@ public float groundcheckradius;
     }
 
 
-private void FixedUpdate() {
-    rgbd2d.velocity=new Vector2(horizontalInput*speedvalue,rgbd2d.velocity.y);
-}
+
    private void Movecharachter(float horizontalInput ){
     Vector3 position = transform.position;
     if (horizontalInput != 0){
-        SoundManager.Instance.play(soundplaces.Playermovement);
+       // SoundManager.Instance.playSound(soundplaces.Playermovement);
          position.x = position.x + horizontalInput*speedvalue*Time.deltaTime;
     transform.position = position;}
    }
