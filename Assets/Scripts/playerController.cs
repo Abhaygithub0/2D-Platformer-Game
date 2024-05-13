@@ -20,31 +20,43 @@ public LayerMask layers;
 public float groundcheckradius;
  internal object playdeathanimation;
 
- //private Rigidbody2D rgbd2d;
+ private Rigidbody2D rgbd2d;
+
+ private float horizontalInput;
+
 
     void Start()
  {
         initialBoxSize = boxCollider2D.size;
         initialBoxOffset = boxCollider2D.offset;
-       // rgbd2d=GetComponent<Rigidbody2D>();
+        rgbd2d=GetComponent<Rigidbody2D>();
          
  }
     private void Update()
     {
    isJumptrue = Physics2D.OverlapCircle(groundcheck.position,groundcheckradius,layers);
 
-         float horizontalInput = Input.GetAxisRaw("Horizontal");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
          bool verticalInput = Input.GetButtonDown("Jump");
          playAnimation(horizontalInput);
-         Movecharachter(horizontalInput ,verticalInput);
+         Movecharachter(horizontalInput);
+         PlayerJump(verticalInput);
     }
 
-   private void Movecharachter(float horizontalInput ,bool verticalInput){
+
+private void FixedUpdate() {
+    rgbd2d.velocity=new Vector2(horizontalInput*speedvalue,rgbd2d.velocity.y);
+}
+   private void Movecharachter(float horizontalInput ){
     Vector3 position = transform.position;
-    position.x = position.x + horizontalInput*speedvalue*Time.deltaTime;
-    transform.position = position;
-   
-     if (verticalInput&& isJumptrue){
+    if (horizontalInput != 0){
+        SoundManager.Instance.play(soundplaces.Playermovement);
+         position.x = position.x + horizontalInput*speedvalue*Time.deltaTime;
+    transform.position = position;}
+   }
+
+   private void PlayerJump(bool verticalInput){
+      if (verticalInput&& isJumptrue){
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpvalue, ForceMode2D.Impulse);
         isJumping=true;
         SoundManager.Instance.play(soundplaces.Playerjump);
@@ -69,9 +81,12 @@ public float groundcheckradius;
         transform.localScale = scale;
 animator.SetBool("IsJump",isJumping&& !isJumptrue);
 
+
+
         if (Input.GetKey(KeyCode.LeftControl)){
         animator.SetBool("IsCrouch",true);
         Crouch(true);
+        SoundManager.Instance.play(soundplaces.Playerjump);
         }
         else{
             animator.SetBool("IsCrouch",false);
