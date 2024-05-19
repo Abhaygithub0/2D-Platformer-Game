@@ -20,7 +20,7 @@ private void OnTriggerEnter2D(Collider2D other)
         {
             LevelManager.Instance.SetCurrentLevelComplete();
             gameoverUI2.SetActive(true);
-            GetComponent<PlayerController>().enabled=false;
+          //  GetComponent<PlayerController>().enabled=false;
             SoundManager.Instance.play(soundplaces.levelunloced);
         }
         else

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,12 +15,12 @@ public class Gameover : MonoBehaviour
     private void playcurrentscene()
     {
         SoundManager.Instance.play(soundplaces.buttonclick);
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void playmenuscene()
     {
          SoundManager.Instance.play(soundplaces.buttonclick);
-       SceneManager.LoadScene(0);
+         SceneManager.LoadScene(0);
     }
 }
